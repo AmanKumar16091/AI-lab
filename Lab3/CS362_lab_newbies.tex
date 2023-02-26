@@ -1,0 +1,119 @@
+\newcommand{\CLASSINPUTbaselinestretch}{1.0} % baselinestretch
+\newcommand{\CLASSINPUTinnersidemargin}{1in} % inner side margin
+\newcommand{\CLASSINPUToutersidemargin}{1in} % outer side margin
+\newcommand{\CLASSINPUTtoptextmargin}{1in}   % top text margin
+\newcommand{\CLASSINPUTbottomtextmargin}{1in}% bottom text margin
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\begin{document}
+\title{Lab Tutorial For Solving TSP using Simulated Annealing}
+\author{Kaishav Basodiya,~\IEEEmembership{202051094}\\
+        Amanshu jaiswal,~\IEEEmembership{202051023}\\
+        Aditya Priyanshu,~\IEEEmembership{202051010}\\
+        and~Abhishek Kumar,~\IEEEmembership{202051003}
+}
+\IEEEtitleabstractindextext{%
+\begin{abstract}
+Simulated Annealing is a popular optimization technique that has been successfully applied to various optimization problems, including the famous Travelling Salesman Problem (TSP). The TSP is an NP-hard problem that involves finding the shortest possible route that visits a set of cities and returns to the starting city. In this paper, we try to get optimal path of TSP using the Simulated Annealing algorithm. The algorithm starts with an initial random tour and iteratively updates the tour by making small random changes until a near-optimal solution is found. The acceptance of new tours is based on a probability function that balances the exploration and exploitation of the search space. The proposed method is tested on various benchmark TSP datasets and results demonstrate the effectiveness and efficiency of the Simulated Annealing approach.
+\end{abstract}
+
+
+\begin{IEEEkeywords}
+TSP ,NP-hard, Simulated Annealing, \LaTeX.
+\end{IEEEkeywords}}
+
+
+% make the title area
+\maketitle
+
+
+
+\IEEEdisplaynontitleabstractindextext
+
+
+
+\IEEEpeerreviewmaketitle
+
+
+\ifCLASSOPTIONcompsoc
+\IEEEraisesectionheading{\section{Introduction}\label{sec:introduction}}
+\else
+\section{Introduction}
+\label{sec:introduction}
+\fi
+ 
+\IEEEPARstart{}
+The Travelling Salesman Problem (TSP) is a classic optimization problem in computer science. In this we try to find the shortest possible route that visits a set of cities and returns to the starting city.  The challenge of the TSP lies in finding the optimal solution among a large number of possible solutions, as the number of possible tours grows rapidly with the number of cities. As a result, the TSP is considered an NP-hard problem, meaning that finding an exact solution for large instances of the problem can be computationally expensive.The TSP has many real-world applications, such as scheduling, logistics, and vehicle routing.
+
+
+\subsection{Different Approaches For Optimal Solution Of TSP- }
+There are several approaches to solve the Travelling Salesman Problem (TSP), including exact algorithms and heuristic algorithms.
+Exact Algorithms guarantees to give optimal solution but they are computationally expensive example - Branch \& Bound , Dynamic Programming.\\
+Heuristic Algorithms are faster but optimal solution isn't guaranteed Example - Simulated Annealing, Ant-colony Optimization\\
+There are other approaches as well like christofides Algo, 2/3-opt Local search,etc.
+
+\section*{Simulated Annealing - }
+Simulated Annealing (SA) is a heuristic optimization algorithm that can be used to solve the Travelling Salesman Problem (TSP). It is a probabilistic method that is inspired by the annealing process used in metallurgy to refine metals.
+
+In the TSP, the algorithm starts with an initial random tour and iteratively updates the tour by making small random changes. The acceptance of new tours is based on a probability function that balances the exploration and exploitation of the search space. The algorithm gradually reduces the temperature, which determines the probability of accepting a new solution that is worse than the current one. This allows the algorithm to escape from local optima and explore the search space more effectively. The algorithm terminates when the temperature has cooled to a certain level or when a satisfactory solution is found.
+
+SA has been shown to perform well on many TSP instances and has been used in various applications, such as vehicle routing and scheduling. Its advantage lies in its ability to balance the exploration and exploitation of the search space and find near-optimal solutions in a reasonable amount of time. However, SA can be computationally expensive and may not converge to the optimal solution in all cases. The choice of parameters, such as the initial temperature and cooling schedule, can also impact the performance of the algorithm.
+\pagebreak
+
+\section*{Pseudo Code For Simulated Annealing -}
+We can define some functions which would help in understanding the code of TSP using Simulated Annealing.\\
+generate\_random\_tour() - takes input of set of cities and generate a random tour\\
+swap\_tour() - swaps the order of 2 random cities in current tour\\
+tour\_cost() - calculate the total cost of input tour\\
+\\
+Now We can define the pseudocode as follows-\\
+\\
+SimulatedAnnealing(cities,initial\_temperature, cooling\_rate,t\_min)\{\\
+\\
+$\hspace*{20pt}$   current\_tour = generate\_random\_tour(cities)\\
+  $\hspace*{20pt}$  best\_tour = current\_tour\\
+$\hspace*{20pt}$    temperature = initial\_temperature\\
+    \\
+ $\hspace*{20pt}$   while temperature $ \geq$ t\_min\\
+    $\hspace*{40pt}$    new\_tour = swap\_tour(current\_tour)\\
+    $\hspace*{40pt}$    delta\_E = evaluate\_tour(new\_tour) - $\hspace*{40pt}$evaluate\_tour(current\_tour)\\
+  $\hspace*{40pt}$      if delta\_E $\leq$0\{\\
+         $\hspace*{60pt}$   current\_tour = new\_tour\\
+    $\hspace*{60pt}$        if evaluate\_tour(current\_tour) $\leq$ $\hspace*{60pt}$evaluate\_tour(best\_tour)\\
+     $\hspace*{60pt}$           best\_tour = current\_tour\}\\
+ $\hspace*{40pt}$       else\{\\
+         $\hspace*{60pt}$   prob = $e^{-delta_E / temperature}$\\
+     $\hspace*{60pt}$       if random(0, 1) $\leq$ prob\{\\
+  $\hspace*{80pt}$              current\_tour = new\_tour\}\}\\
+     $\hspace*{40pt}$   temperature *= cooling\_rate\\
+        \\
+   $\hspace*{20pt}$ return best\_tour\\
+\}\\
+
+\section*{Code and Results- }
+For Code and Results ,You can visit our \href{https://github.com/Aditya8315/CS362-lab3}{Code repository} 
+
+\section*{Conclusion}
+As Simulated Annealing is a heuristic based Approach so to get optimal solution is not sure and our results are also supporting the fact. We tried to get better solution by applying greedy algorithm to find a tour on cities and then we applied Simulated Annealing on that tour and we get better solution with lesser time. We also observed that if we increase the iterations and tour was becoming more optimized so Simulated Annealing can give optimal solution if we increase its iteration but we were not sure for how much iteration the solution would be the optimal one. 
+
+  \section*{Acknowledgments}
+
+
+The authors would like to thank Prof. Pratik Shah \IEEEmembership{IIIT Vadodara} , 
+
+\begin{thebibliography}{1}
+
+\bibitem{}
+A First Inntroduction to Artificial Intelligence By Prof.D Khemani IIT Madras.
+\end{thebibliography}
+\end{document}
+
+
